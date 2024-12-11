@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  userName  String   @unique
+  password  String
+  phone     String?
+  roleAdmin Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title     String
+  address   String
+  body      String
+  image     String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
+
+model News {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String
+  public    Boolean  @default(false)
+  image     String
+  exptime   DateTime 
+
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}
