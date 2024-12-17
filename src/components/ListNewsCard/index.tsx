@@ -1,13 +1,17 @@
 'use client';
 
-import {faArrowLeft, faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import {getNews} from '@/services/news';
-import NewsCard from '../NewsCard';
 import {ListNewsCardPropsType} from '@/types/type';
 import Image from 'next/image';
 import {useEffect, useState} from 'react';
+import {Clock} from '../Clock/Clock';
+import InfoBox from '../InfoBox';
+import '@/sass/global.scss';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import { Clock } from '../Clock/Clock';
+import {
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 const ListNewsCard = () => {
   const [list, setList] = useState<ListNewsCardPropsType>([]);
@@ -44,13 +48,36 @@ const ListNewsCard = () => {
   }, []);
 
   return (
-    <div className="relative h-full pt-2">
+    <>
       {list.length > 0 && (
-        <div className="w-full">
-            <div className='relative glassBox ml-2 rounded-md  w-fit z-10'>
-                <Clock type='full'/>
+        <div className="relative w-full h-full flex flex-col justify-between px-4">
+          <div className="flex w-full justify-between items-start mt-4">
+            <div className="relative glassBox rounded-md  w-6/12 max-h-64 z-20 p-2">
+              <InfoBox
+                title={list[index].title}
+                content={list[index].content}
+              />
             </div>
-          <div className="absolute w-full h-full left-0 top-0 z-0">
+            <div className="relative glassBox rounded-md  w-fit z-20">
+              <Clock type="full" />
+            </div>
+          </div>
+          <div className="flex justify-between items-center absolute z-10 w-full h-full left-0">
+            <div
+              onClick={handlePre}
+              className="cursor-pointer glassBox w-10 hover:text-cyan-400 ml-4 h-10 rounded-full flex justify-center items-center"
+            >
+              <FontAwesomeIcon icon={faAngleDoubleLeft} />
+            </div>
+            <div
+              onClick={handleNext}
+              className="cursor-pointer glassBox w-10 hover:text-cyan-400 mr-4 h-10 rounded-full flex justify-center items-center"
+            >
+              <FontAwesomeIcon icon={faAngleDoubleRight} />
+            </div>
+          </div>
+
+          <div className="absolute select-none w-full h-full left-0 top-0 z-0">
             <Image
               src={list[index].image}
               alt={list[index].title}
@@ -58,40 +85,19 @@ const ListNewsCard = () => {
               style={{objectFit: 'cover'}}
             />
           </div>
-        </div> 
+          <div className="flex justify-center items-center  relative w-full z-10 mb-4">
+            {list.length > 0 &&
+              list.map((_, i) => (
+                <div
+                  onClick={() => setIndex(i)}
+                  key={i}
+                  className={`cursor-pointer w-3 h-3 mx-2 rounded-full ${index == i ? ' bg-primary w-8' : 'bg-muted'}`}
+                ></div>
+              ))}
+          </div>
+        </div>
       )}
-
-      <div className="flex justify-center items-center absolute bottom-10 left-0 w-full h-2/6">
-        <div
-          onClick={handlePre}
-          className="cursor-pointer glassBox hover:text-cyan-400 h-full flex justify-center items-center px-2"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </div>
-        {list.length > 0 &&
-          list.map((news, i) => (
-            <div
-              key={i}
-              className={`cursor-pointer w-36 h-52 mx-1 hover:w-40 hover:h-60 shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out ${index === i && 'border border-color-primary'}`}
-            >
-              <NewsCard
-                content={news.content}
-                image={news.image}
-                title={news.title}
-                onClick={() => {
-                  setIndex(i);
-                }}
-              />
-            </div>
-          ))}
-        <div
-          onClick={handleNext}
-          className="cursor-pointer glassBox h-full hover:text-cyan-400 flex justify-center items-center px-2"
-        >
-          <FontAwesomeIcon icon={faArrowRight} />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

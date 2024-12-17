@@ -25,6 +25,11 @@ export interface ClockPropType {
   type: 'full' | 'time';
 }
 
+export interface InfoBoxPropsType {
+  title:string,
+  content:string
+}
+
 export type ListNewsCardPropsType = NewsCardPropsType[] | [];
 
 export interface InputPropsType {
@@ -95,4 +100,14 @@ export interface MainContextProps {
 
 export interface MainContextState {
   user: any | undefined;
+}
+export interface Pages{
+  label:string;
+  icon:IconProp;
+  URL:string;
+}
+
+export interface NavBarVerticalPropsType{
+  list:Pages[];
+  childLink: Pages[];
 }

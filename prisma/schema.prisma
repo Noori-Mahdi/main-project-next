@@ -39,3 +39,21 @@ model News {
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
 }
+
+model Pages {
+  id        Int       @id @default(autoincrement())
+  label     String
+  icon      String    
+  URL       String    @default("/")
+  public    Boolean   @default(true)
+  childLink ChildLink[] // رابطه یک به چند
+}
+
+model ChildLink {
+  id        Int       @id @default(autoincrement())
+  label     String
+  URL       String
+  icon      String
+  pageId    Int
+  page      Pages     @relation(fields: [pageId], references: [id]) // کلید خارجی
+}

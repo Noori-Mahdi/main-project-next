@@ -1,6 +1,5 @@
 import {PrismaClient} from '@prisma/client';
-import type {NextApiRequest, NextApiResponse} from 'next';
-import jwt from 'jsonwebtoken';
+
 import {decodeToken} from '@/helper/authentication';
 import {cookies} from 'next/headers';
 import {RequestCookie} from 'next/dist/compiled/@edge-runtime/cookies';

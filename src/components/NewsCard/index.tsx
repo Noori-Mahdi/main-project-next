@@ -15,11 +15,11 @@ const NewsCard = ({title, content, rate, image,onClick}: NewsCardPropsType) => {
           style={{ objectFit: 'cover' }}
         />
       </div>
-      <div className="flex flex-col justify-between relative w-full h-2/6 hover:h-full transition-all duration-300 glassBox p-1">
-        <div className="text-base font-medium tracking-wide truncate">
+      <div className="flex flex-col relative w-full h-2/6 hover:h-full transition-all duration-300 glassBox px-1 ">
+        <div className="text-base font-medium tracking-wide w-full">
           {title}
         </div>
-        <div className="text-xs truncate">{content}</div>
+        <div className="text-xs">{content}</div>
         <div className="flex justify-between items-center">
           {rate && (
             <>

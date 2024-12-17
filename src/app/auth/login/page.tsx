@@ -60,7 +60,7 @@ const Login = () => {
           TeamForge
         </h2>
       </div>
-      <form onSubmit={handleSubmit} className="">
+      <form onSubmit={handleSubmit} className="w-full">
         <h3 className="text-3xl text-center mb-5 font-bold capitalize">
           Sing in
         </h3>
