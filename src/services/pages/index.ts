@@ -1,7 +1,7 @@
 import { api } from "../api";
 
 const getPages = () => {
-    return api.get('/pages');
+    return api.get('/page');
   };
 
 export {getPages}

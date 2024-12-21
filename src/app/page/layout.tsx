@@ -1,5 +1,4 @@
 import NavBarVertical from '@/components/NavBarVertical';
-import './globals.css';
 
 export default function RootLayout({
   children,
@@ -7,7 +6,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (<div className={``}>
-    <div><NavBarVertical list={[]} childLink={[]}/></div>
+    <div><NavBarVertical/></div>
     <div>{children}</div>
     </div>);
 }
