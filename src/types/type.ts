@@ -1,5 +1,7 @@
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
-import {ChangeEvent} from 'react';
+import {ChangeEvent, ReactNode} from 'react';
+import * as solidIcons from '@fortawesome/free-solid-svg-icons';
+import {MouseEventHandler} from 'react';
 
 type InputType =
   | 'text'
@@ -52,6 +54,7 @@ export interface InputPropsType {
   showPassword?: boolean;
   tooltip?: string;
   className?: string;
+  classNameLabel?: string;
   passwordLvl?: (e: number) => void;
   onError?: (e: string | null) => void;
   onFocus?: (
@@ -79,12 +82,13 @@ export interface InputBoxType extends InputPropsType {
 }
 
 export interface ButtonPropsType {
-  label: string;
+  label?: string;
   onClick?: (e: any) => void;
   type?: 'button' | 'submit' | 'reset';
   styleType?: 'primary' | 'secondary' | 'danger';
   disabled?: boolean;
   className?: string;
+  icon?: IconName;
 }
 
 export interface ContextReturnType {
@@ -107,6 +111,56 @@ export interface Pages {
   URL: string;
   public: boolean;
   childLink: Pages[];
-
 }
 
+export interface UserInfo {
+  image: any;
+  userName: string;
+  email: string;
+  mode: string;
+}
+
+export interface UserBoxPropsType {
+  user: UserInfo;
+}
+
+export interface FriendListPropsType {
+  list: UserInfo[];
+}
+
+export interface ImgBoxPropsType {
+  alt: string;
+  image: any;
+  imageWidth: number;
+  imageHeight: number;
+  label?: string;
+  subLabel?: string;
+  classImage?: string;
+  classImageBox?: string;
+  classLabel?: string;
+  classSubLabel?: string;
+}
+
+export interface InfoBoxUserPropsType
+  extends Pick<ImgBoxPropsType, 'alt' | 'image' | 'label' | 'subLabel'> {}
+
+export interface ModalPropsType {
+  isOpen: boolean;
+  onClose?: () => void;
+  children: ReactNode;
+}
+
+export type IconName = keyof typeof solidIcons;
+
+export interface DynamicIconProps {
+  iconName: IconName;
+  className?: string;
+  onClick?: MouseEventHandler<SVGSVGElement>;
+}
+
+export interface ConfirmationModalPropsType {
+  isOpen:boolean;
+  onConfirm:()=>void;
+  onCancel:()=>void;
+  message:string;
+}

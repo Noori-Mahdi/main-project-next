@@ -14,9 +14,10 @@ import {
   faMobileScreen,
 } from '@fortawesome/free-solid-svg-icons';
 import InputBox from '@/components/InputBox';
+import Link from 'next/link';
 
 const Register = () => {
-  const [error, setError] = useState< string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     userName: '',
     password: '',
@@ -35,7 +36,6 @@ const Register = () => {
       setActiveSubmit(false);
       setError('Passwords do not match.');
     } else {
-
       setError(null);
     }
   };
@@ -65,95 +65,99 @@ const Register = () => {
   }, [formData]);
 
   return (
-      
-      <>
-        <div className="absolute flex items-center justify-between left-2 top-0">
-          <FontAwesomeIcon className="text-3xl" icon={faJedi} />
-          <h2 data-text="TeamForge" className="textAnimation">
-            TeamForge
-          </h2>
+    <>
+      <div className="absolute flex items-center justify-between left-2 top-0">
+        <FontAwesomeIcon className="text-3xl" icon={faJedi} />
+        <h2 data-text="TeamForge" className="textAnimation">
+          TeamForge
+        </h2>
+      </div>
+      <form onSubmit={handleSubmit} className="w-full">
+        <h3 className="text-3xl text-center mb-5 font-bold capitalize">
+          Register
+        </h3>
+        <div className="mb-3">
+          {' '}
+          <InputBox
+            label="User Name"
+            onChange={(e) => handleFormSubmit(e)}
+            name="userName"
+            type="text"
+            required
+            icon={faUser}
+            placeholder="Enter your name ..."
+            className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
+          />
         </div>
-        <form onSubmit={handleSubmit} className="w-full">
-          <h3 className="text-3xl text-center mb-5 font-bold capitalize">
-            Register
-          </h3>
-          <div className="mb-3">
-            {' '}
-            <InputBox
-              label="User Name"
-              onChange={(e) => handleFormSubmit(e)}
-              name="userName"
-              type="text"
-              required
-              icon={faUser}
-              placeholder="Enter your name ..."
-              className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
-            />
-          </div>
-          <div className="mb-3">
-            {' '}
-            <InputBox
-              label="Email"
-              onChange={(e) => handleFormSubmit(e)}
-              name="email"
-              type="email"
-              required
-              icon={faEnvelope}
-              placeholder="Enter your Email ..."
-              className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
-            />
-          </div>
-          <div className="mb-3">
-            {' '}
-            <InputBox
-              label="Password"
-              onChange={(e) => handleFormSubmit(e)}
-              name="password"
-              type="password"
-              required
-              icon={faKey}
-              disableForgetPassword={true}
-              placeholder="Enter your Password ..."
-              className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
-            />
-          </div>
-          <div className="mb-3">
-            {' '}
-            <InputBox
-              label="Confirm Password"
-              onBlur={(e) => {checkPassword(e.target.value)}}
-              name="confirmPassword"
-              disableForgetPassword={true}
-              type="password"
-              propError={error}
-              required
-              icon={faLock}
-              placeholder="confirmPassword ..."
-              className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
-            />
-          </div>
-          <div className="mb-3">
-            {' '}
-            <InputBox
-              label="Phone"
-              onChange={(e) => handleFormSubmit(e)}
-              name="phone"
-              type="text"
-              icon={faMobileScreen}
-              placeholder="Password your Phone Number ..."
-              className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
-            />
-          </div>
-          <div className="w-full">
-            <Button
-              className="uppercase"
-              type="submit"
-              label="Register"
-              disabled={!activeSubmit}
-            />
-          </div>
-        </form>
-      </>
+        <div className="mb-3">
+          {' '}
+          <InputBox
+            label="Email"
+            onChange={(e) => handleFormSubmit(e)}
+            name="email"
+            type="email"
+            required
+            icon={faEnvelope}
+            placeholder="Enter your Email ..."
+            className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
+          />
+        </div>
+        <div className="mb-3">
+          {' '}
+          <InputBox
+            label="Password"
+            onChange={(e) => handleFormSubmit(e)}
+            name="password"
+            type="password"
+            required
+            icon={faKey}
+            disableForgetPassword={true}
+            placeholder="Enter your Password ..."
+            className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
+          />
+        </div>
+        <div className="mb-3">
+          {' '}
+          <InputBox
+            label="Confirm Password"
+            onBlur={(e) => {
+              checkPassword(e.target.value);
+            }}
+            name="confirmPassword"
+            disableForgetPassword={true}
+            type="password"
+            propError={error}
+            required
+            icon={faLock}
+            placeholder="confirmPassword ..."
+            className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
+          />
+        </div>
+        <div className="mb-3">
+          {' '}
+          <InputBox
+            label="Phone"
+            onChange={(e) => handleFormSubmit(e)}
+            name="phone"
+            type="text"
+            icon={faMobileScreen}
+            placeholder="Password your Phone Number ..."
+            className="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "
+          />
+        </div>
+        <div className="w-full">
+          <Button
+            className="uppercase"
+            type="submit"
+            label="Register"
+            disabled={!activeSubmit}
+          />
+        </div>
+      </form>
+      <div className="text-center mt-2 text-sm text-cyan-400">
+        <Link href={'/auth/login'}>I have account</Link>
+      </div>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import InputBox from '@/components/InputBox';
 import {faUser, faKey} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faJedi} from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 
 const Login = () => {
   const {updateUserInfo} = useContext(Context);
@@ -94,6 +95,9 @@ const Login = () => {
           <Button type="submit" label="Sing in" disabled={!activeSubmit} />
         </div>
       </form>
+      <div className="text-center mt-2 text-sm text-cyan-400">
+        <Link href={'/auth/register'}>Create New Account</Link>
+      </div>
     </>
   );
 };

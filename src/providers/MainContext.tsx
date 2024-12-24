@@ -23,8 +23,9 @@ const MainContext = (props: MainContextProps) => {
 
   const updateUserInfo = async () => {
     try {
-      // const res = await getUserInfo();
-      // console.log('User info response:', res);
+      const res = await getUserInfo();
+      setState((prevState) => ({ ...prevState, user: res.data.data }));
+      console.log('User info response:', res.data.data);
     } catch (e) {
       console.error('Error in updateUserInfo:', e);
     }
@@ -36,7 +37,7 @@ const MainContext = (props: MainContextProps) => {
 
   const handleLogout = () => {
     logout().then(() => {
-      router.push('/');
+      router.push('/auth/login');
       setState((prevState) => ({...prevState, user: undefined}));
     });
   };

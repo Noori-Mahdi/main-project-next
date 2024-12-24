@@ -16,7 +16,12 @@ model User {
   roleAdmin Boolean  @default(false)
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
+
+  // تعریف رابطه many-to-many بدون نیاز به استفاده از references
+  friends   User[]   @relation("UserFriends")
+  friendOf  User[]   @relation("UserFriends")
 }
+
 
 model Post {
   id        Int      @id @default(autoincrement())

@@ -8,7 +8,7 @@ const Input = ({
   type,
   label,
   name,
-  defaultValuevalue,
+  defaultValue,
   onChange,
   onFocus,
   onBlur,
@@ -20,6 +20,7 @@ const Input = ({
   maxLength,
   minLength,
   className,
+  classNameLabel,
   min,
   max,
   rows,
@@ -91,7 +92,7 @@ const Input = ({
     <div>
       {label && (
         <div className="flex">
-          <label htmlFor={name}>{label}</label>
+          <label className={classNameLabel} htmlFor={name}>{label}</label>
           {required && <div>*</div>}
         </div>
       )}
@@ -121,7 +122,7 @@ const Input = ({
         <select
           id={name}
           name={name}
-          value={defaultValuevalue}
+          value={defaultValue}
           className={className}
           onChange={handleChange}
           disabled={disabled}
@@ -143,7 +144,7 @@ const Input = ({
           className={className}
           id={name}
           name={name}
-          value={defaultValuevalue}
+          value={defaultValue}
           onChange={handleChange}
           onFocus={onFocus}
           onBlur={handleBlur}
@@ -159,7 +160,7 @@ const Input = ({
           id={name}
           name={name}
           type={showPassword ? 'text' : type}
-          value={defaultValuevalue}
+          value={defaultValue}
           onChange={handleChange}
           onFocus={onFocus}
           onBlur={handleBlur}

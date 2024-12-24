@@ -1,5 +1,6 @@
 import {ButtonPropsType} from '@/types/type';
 import React from 'react';
+import DynamicIcon from '../DynamicIcon';
 
 const Button = ({
   label,
@@ -7,6 +8,7 @@ const Button = ({
   type = 'button',
   styleType = 'primary',
   disabled = false,
+  icon,
   className = '',
 }: ButtonPropsType) => {
   const getButtonStyle = () => {
@@ -23,16 +25,16 @@ const Button = ({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <button
         type={type}
         onClick={(e) => {
           onClick && onClick(e);
         }}
         disabled={disabled}
-        className={` px-4 text-lg font-semibold w-full py-2 rounded ${getButtonStyle()} ${className} ${disabled ? 'cursor-not-allowed':'cursor-pointer' } disabled:opacity-50`}
+        className={` px-4 text-lg font-semibold w-full py-2 rounded ${getButtonStyle()} ${className} ${disabled ? 'cursor-not-allowed':'cursor-pointer' } ${icon && 'flex justify-center items-center'} disabled:opacity-50`}
       >
-        {label}
+        {icon ? <DynamicIcon className='text-sm' iconName={icon}/>: label}
       </button>
     </div>
   );
