@@ -11,6 +11,7 @@ const FriendList = ({ list }: FriendListPropsType) => {
 
   const openInviteModal = () => setIsInviteModalOpen(true);
   const closeInviteModal = () => setIsInviteModalOpen(false);
+  const imgTest = '/uploads/News/img1.jpg'
 
   return (
     <div className="h-full w-full pt-2">
@@ -20,7 +21,7 @@ const FriendList = ({ list }: FriendListPropsType) => {
             <li className="px-1 py-2" key={index}>
               <InfoBoxUser
                 alt={item.userName}
-                image={item.image}
+                image={imgTest}
                 label={item.userName}
                 subLabel={item.email}
               />

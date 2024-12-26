@@ -1,5 +1,5 @@
 'use client';
-import React, {createContext, useEffect, useMemo} from 'react';
+import React, {createContext, useEffect, useMemo, useState} from 'react';
 
 import {
   ContextReturnType,
@@ -9,6 +9,7 @@ import {
 import {getUserInfo} from '@/services/userInfo';
 import {logout} from '@/services/auth';
 import {useRouter} from 'next/navigation';
+import { getFriends } from '@/services/friends';
 
 export const Context = createContext<ContextReturnType>(
   {} as ContextReturnType
@@ -20,16 +21,26 @@ const MainContext = (props: MainContextProps) => {
   const [state, setState] = React.useState<MainContextState>({
     user: undefined,
   });
+  const [friendList,setFriendList] = useState()
 
   const updateUserInfo = async () => {
     try {
       const res = await getUserInfo();
-      setState((prevState) => ({ ...prevState, user: res.data.data }));
+      setState((prevState) => ({...prevState, user: res.data.data}));
       console.log('User info response:', res.data.data);
     } catch (e) {
       console.error('Error in updateUserInfo:', e);
     }
   };
+
+  // const updateFriendList = async () => {
+  //   try {
+  //     const res = await getFriends(state.user.id)
+  //     setFriendList(res.data)
+  //   } catch (error) {
+  //     console.error('Error in updateListFriend:', error);
+  //   }
+  // };
 
   useEffect(() => {
     updateUserInfo();
@@ -50,9 +61,11 @@ const MainContext = (props: MainContextProps) => {
     <Context.Provider
       value={{
         ...state,
+        // friendList,
         isLoggedIn,
         updateUserInfo,
         handleLogout,
+        // updateFriendList,
       }}
     >
       {children}

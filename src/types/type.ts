@@ -92,10 +92,12 @@ export interface ButtonPropsType {
 }
 
 export interface ContextReturnType {
+  // friendList:any;
   user: any;
   isLoggedIn: boolean;
   updateUserInfo: () => void;
   handleLogout: () => void;
+  // updateFriendList: () => void;
 }
 
 export interface MainContextProps {
@@ -114,9 +116,10 @@ export interface Pages {
 }
 
 export interface UserInfo {
+  id:string;
   image: any;
   userName: string;
-  email: string;
+  email?: string;
   mode: string;
 }
 

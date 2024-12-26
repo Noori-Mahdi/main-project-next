@@ -1,10 +1,14 @@
 'use client';
 
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import Button from '../Button';
 import Input from '../Inpurt';
 import Modal from '../Modal';
 import {getSearchUsers} from '@/services/friends';
+import {UserInfo} from '@/types/type';
+import DynamicIcon from '../DynamicIcon';
+import {sendFriendRequest} from '@/services/requestFriend';
+import {Context} from '@/providers/MainContext';
 
 interface InviteFriendPropsType {
   show: boolean;
@@ -13,19 +17,25 @@ interface InviteFriendPropsType {
 
 const InviteFriend = ({show, onClose}: InviteFriendPropsType) => {
   const [searchName, setSearchName] = useState('');
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState<[] | UserInfo[]>([]);
+  const {user} = useContext(Context);
 
-  const searchUser = async (string: string) => {
-    const res = await getSearchUsers(string);
-    setUserList(res.data);
+  const searchUser = async () => {
+    const res = await getSearchUsers(searchName);
+    setUserList(res.data.data);
   };
-  console.log(userList, 'resresresres');
-
+  const requestAddFriend = async (friendId: string) => {
+    try {
+      await sendFriendRequest(user.id, friendId);
+    } catch (e) {
+      console.error('Error in request:', e);
+    }
+  };
   return (
     <Modal isOpen={show} onClose={onClose}>
       <div>
         <h2 className="text-lg font-bold mb-4">Invite Friend</h2>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-4">
           <div className="grow">
             <Input
               name="userName"
@@ -39,7 +49,7 @@ const InviteFriend = ({show, onClose}: InviteFriendPropsType) => {
             />
           </div>
 
-          <div className="flex justify-center items-center ml-4  w-6 h-6">
+          <div className="flex justify-center items-center  w-8 h-8">
             {' '}
             <Button
               icon="faCheck"
@@ -50,6 +60,23 @@ const InviteFriend = ({show, onClose}: InviteFriendPropsType) => {
             />
           </div>
         </div>
+        {userList && (
+          <ul>
+            {userList.map((user, index) => (
+              <li className="flex justify-between" key={user.id}>
+                <div className="grow"> {user.userName}</div>
+                <div className="w-8 h-8">
+                  {' '}
+                  <Button
+                    onClick={() => requestAddFriend(user.id)}
+                    icon="faUserPlus"
+                    styleType="secondary"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </Modal>
   );

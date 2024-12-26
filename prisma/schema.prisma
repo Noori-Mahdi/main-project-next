@@ -8,19 +8,22 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  userName  String   @unique
-  password  String
-  phone     String?
-  roleAdmin Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  id          String          @id @default(uuid())
+  email       String          @unique
+  userName    String          @unique
+  password    String
+  phone       String?
+  roleAdmin   Boolean         @default(false)
+  createdAt   DateTime        @default(now())
+  updateAt    DateTime        @updatedAt
 
-  // تعریف رابطه many-to-many بدون نیاز به استفاده از references
-  friends   User[]   @relation("UserFriends")
-  friendOf  User[]   @relation("UserFriends")
+  friends     User[]          @relation("UserFriends")
+  friendOf    User[]          @relation("UserFriends")
+  
+  sentRequests FriendRequest[] @relation("SenderRequests")
+  receivedRequests FriendRequest[] @relation("ReceiverRequests")
 }
+
 
 
 model Post {
@@ -61,4 +64,14 @@ model ChildLink {
   icon      String
   pageId    Int
   page      Pages     @relation(fields: [pageId], references: [id]) // کلید خارجی
+}
+
+model FriendRequest {
+  id          Int      @id @default(autoincrement())
+  senderId    String   // کاربری که درخواست فرستاده
+  sender      User     @relation("SenderRequests", fields: [senderId], references: [id])
+  receiverId  String   // کاربری که درخواست دریافت کرده
+  receiver    User     @relation("ReceiverRequests", fields: [receiverId], references: [id])
+  status      String   @default("pending") // وضعیت درخواست: pending, accepted, rejected
+  createdAt   DateTime @default(now())
 }

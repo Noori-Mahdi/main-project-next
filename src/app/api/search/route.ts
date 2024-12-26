@@ -23,7 +23,6 @@ export async function GET(req: Request) {
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error(error);
     return new Response('Internal server error', { status: 500 });
   }
 }

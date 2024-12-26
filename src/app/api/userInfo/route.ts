@@ -26,11 +26,11 @@ export async function GET() {
         email: true,
         userName: true,
         phone: true,
+        friends:true
       },
     });
     return Response.json({data: user});
   } catch (error) {
-    console.log(error);
     return new Response('Internal server error', {status: 500});
   }
 }
