@@ -112,15 +112,14 @@ export interface Pages {
   icon: any;
   URL: string;
   public: boolean;
-  childLink: Pages[];
+  childLink?: Pages[];
 }
 
 export interface UserInfo {
-  id:string;
+  id: string;
   image: any;
   userName: string;
   email?: string;
-  mode: string;
 }
 
 export interface UserBoxPropsType {
@@ -162,8 +161,8 @@ export interface DynamicIconProps {
 }
 
 export interface ConfirmationModalPropsType {
-  isOpen:boolean;
-  onConfirm:()=>void;
-  onCancel:()=>void;
-  message:string;
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+  message: string;
 }

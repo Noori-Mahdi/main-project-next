@@ -1,22 +1,26 @@
-import axios,{AxiosError, InternalAxiosRequestConfig} from "axios";
+import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 
 export const api = axios.create({
     baseURL: 'http://localhost:3000/api/',
-    headers:{'content-Type':'application/json'}
+    headers: { 'Content-Type': 'application/json' }
 });
 
-const apiInterceptor = async(request:InternalAxiosRequestConfig) =>{
-    const token = localStorage.getItem('token');
-    if(token){
-        request.headers.Authorization = `Bearer ${token}`;
+// اینترسپتور درخواست
+const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
+    // بررسی اینکه کد در مرورگر اجرا می‌شود
+    if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');
+        if (token) {
+            request.headers.Authorization = `Bearer ${token}`;
+        }
     }
     return request;
-}
+};
 
-const errorInterceptor = async(axiosError: AxiosError) => {
-    return Promise.reject(axiosError)
+// اینترسپتور پاسخ
+const errorInterceptor = async (axiosError: AxiosError) => {
+    return Promise.reject(axiosError);
 };
 
 api.interceptors.request.use(apiInterceptor);
-
-api.interceptors.response.use((res) => res,errorInterceptor)
+api.interceptors.response.use((res) => res, errorInterceptor);

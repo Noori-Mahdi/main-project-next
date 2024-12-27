@@ -33,14 +33,14 @@ const MainContext = (props: MainContextProps) => {
     }
   };
 
-  // const updateFriendList = async () => {
-  //   try {
-  //     const res = await getFriends(state.user.id)
-  //     setFriendList(res.data)
-  //   } catch (error) {
-  //     console.error('Error in updateListFriend:', error);
-  //   }
-  // };
+  const updateFriendList = async () => {
+    try {
+      const res = await getFriends(state.user.id)
+      setFriendList(res.data)
+    } catch (error) {
+      console.error('Error in updateListFriend:', error);
+    }
+  };
 
   useEffect(() => {
     updateUserInfo();

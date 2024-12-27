@@ -36,7 +36,7 @@ const Login = () => {
       await updateUserInfo();
 
       // به صفحه / منتقل می‌شویم
-      router.replace('/');
+      router.replace('/page/home');
     } catch (e) {
       console.log(e);
     }
