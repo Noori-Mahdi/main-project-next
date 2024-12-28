@@ -5,6 +5,7 @@ import {getUserInfo} from '@/helper/authentication'; // وارد کردن تاب
 import {Pages} from '@prisma/client';
 import {cookies} from 'next/headers'; // برای دسترسی به کوکی‌ها
 import FriendList from '@/components/FriendList';
+import {getFriendRequest} from '@/services/requestFriend';
 
 export default async function RootLayout({
   children,
@@ -37,8 +38,11 @@ export default async function RootLayout({
     }
 
     // حالا می‌توانید به roleAdmin دسترسی داشته باشید
-    const {roleAdmin, friends} = userInfo;
-    console.log(friends, 'friends');
+    const {roleAdmin, friends, id, userName} = userInfo;
+
+    // دریافت نوتیفیکیشن های کاربر از سرور
+    const notif = await getFriendRequest(id);
+    console.log(notif, 'notifnotif');
     // دریافت صفحات از سرور
     const res = await getPages();
     const pageListArray = res.data.data;
@@ -51,7 +55,7 @@ export default async function RootLayout({
         </div>
         <div className="flex flex-col w-10/12 h-full">
           <div>
-            <Dashboard />
+            <Dashboard notifList={notif.data} userName={userName} />
           </div>
           <div className="flex h-full">
             <div className="grow">{children}</div>
