@@ -49,7 +49,6 @@ export async function PUT(req: NextRequest) {
     // دریافت داده‌ها از request
     const data = await req.json();
     const {requestId, isAccepted} = data;
-
     // بررسی اینکه آیا requestId معتبر است یا خیر
     if (!requestId) {
       return NextResponse.json(
@@ -127,7 +126,6 @@ export async function PUT(req: NextRequest) {
     );
   }
 }
-
 
 export async function GET(req: Request) {
   const url = new URL(req.url);

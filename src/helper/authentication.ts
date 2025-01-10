@@ -68,7 +68,9 @@ export const getUserInfo = async (req: any) => {
         userName: true,
         phone: true,
         roleAdmin:true,
-        friends:true
+        friends:true,
+        receivedRequests:true,
+        image:true,
       },
     });
     return user;

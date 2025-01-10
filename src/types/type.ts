@@ -141,6 +141,7 @@ export interface ImgBoxPropsType {
   classImageBox?: string;
   classLabel?: string;
   classSubLabel?: string;
+  onClick?:()=>void
 }
 
 export interface InfoBoxUserPropsType
@@ -165,4 +166,19 @@ export interface ConfirmationModalPropsType {
   onConfirm: () => void;
   onCancel: () => void;
   message: string;
+}
+
+export interface RequestFriendNotifType {
+  id: number;
+  senderId: string | 'systeam';
+  receiverId: string;
+  status: 'pending' | 'accepted' | 'rejected';
+  sender: {
+    id: number;
+    image: any;
+    userName: string;
+    email?: string;
+    title?: string;
+    content?: string;
+  };
 }

@@ -12,14 +12,12 @@ interface NavBarVerticalPropsType {
   adminMode: boolean;
 }
 const NavBarVertical = ({list, adminMode}: NavBarVerticalPropsType) => {
-  // const [list, setList] = useState<Pages[] | []>([]);
   const [isOpen, setIsOpen] = useState(true);
   const [showLogOutMassage, setShowLogOutMassage] = useState(false);
   const [openPages, setOpenPages] = useState<{[key: number]: boolean}>({});
 
   const {handleLogout} = useContext(Context);
   console.log(adminMode, 'adminMode');
-  // Toggle open/close for a specific page
   const togglePageOpen = (index: number) => {
     setOpenPages((prev) => ({
       ...prev,
@@ -52,18 +50,24 @@ const NavBarVertical = ({list, adminMode}: NavBarVerticalPropsType) => {
           </div>
           <div onClick={() => setIsOpen(!isOpen)}>
             <DynamicIcon
-              className={`cursor-pointer text-sm transform hover:text-slate-400 ${
-                isOpen ? 'rotate-0' : 'rotate-180'
+              className={`cursor-pointer text-sm transform  hover:text-slate-400 ${
+                isOpen ? 'rotate-0 ml-3' : 'rotate-180'
               } transition-transform duration-300 ease-in-out`}
               iconName={'faAnglesLeft'}
             />
           </div>
         </div>
         {list &&
-          list.map((page, index) =>
-            page.public || adminMode ? (
+          list.map((page, index) => {
+            if (!adminMode && !page.public) {
+              return null;
+            }
+
+            return (
               <li
-                className={`${!isOpen && 'text-center'} w-full my-3 transition-colors duration-300 rounded-md ease-in-out hover:bg-slate-600`}
+                className={`${
+                  !isOpen && 'text-center'
+                } w-full my-3 transition-colors duration-300 rounded-md ease-in-out hover:bg-slate-600`}
                 key={index}
               >
                 {page.childLink && page.childLink.length > 0 ? (
@@ -140,10 +144,9 @@ const NavBarVertical = ({list, adminMode}: NavBarVerticalPropsType) => {
                   </Link>
                 )}
               </li>
-            ) : (
-              <></>
-            )
-          )}
+            );
+          })}
+
         <li
           onClick={() => setShowLogOutMassage(true)}
           className={`${!isOpen && 'text-center'} block p-2 cursor-pointer  rounded transition-colors duration-300 ease-in-out hover:text-red-600 hover:bg-slate-600`}

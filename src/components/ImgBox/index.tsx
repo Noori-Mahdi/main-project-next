@@ -12,14 +12,20 @@ const ImgBox = ({
   imageHeight,
   imageWidth,
   classImageBox,
+  onClick,
 }: ImgBoxPropsType) => {
   return (
     <>
-      <div className={classImageBox}>
+      <div
+        className={`${classImageBox} `}
+        onClick={() => {
+          onClick && onClick();
+        }}
+      >
         <Image
           width={imageWidth}
           height={imageHeight}
-          className={classImage}
+          className={`${classImage} pointer-events-none`}
           alt={alt}
           src={image}
         />

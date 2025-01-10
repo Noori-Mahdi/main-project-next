@@ -38,11 +38,12 @@ export default async function RootLayout({
     }
 
     // حالا می‌توانید به roleAdmin دسترسی داشته باشید
-    const {roleAdmin, friends, id, userName} = userInfo;
+    const {roleAdmin, friends, id, userName, image} = userInfo;
 
     // دریافت نوتیفیکیشن های کاربر از سرور
     const notif = await getFriendRequest(id);
-    console.log(notif, 'notifnotif');
+    console.log(notif.data, 'notif');
+
     // دریافت صفحات از سرور
     const res = await getPages();
     const pageListArray = res.data.data;
@@ -50,16 +51,20 @@ export default async function RootLayout({
     // رندر کردن کامپوننت‌ها
     return (
       <div className="flex w-screen h-screen p-2">
-        <div className="w-2/12 h-full">
+        <div className="w-fit h-full">
           <NavBarVertical list={pageListArray} adminMode={roleAdmin} />
         </div>
-        <div className="flex flex-col w-10/12 h-full">
-          <div>
-            <Dashboard notifList={notif.data} userName={userName} />
+        <div className="flex flex-col grow h-full">
+          <div className='z-20'>
+            <Dashboard
+              imgUrl={image}
+              notifList={notif.data}
+              userName={userName}
+            />
           </div>
-          <div className="flex h-full">
-            <div className="grow">{children}</div>
-            <div>
+          <div className="flex h-full relative">
+            <div className="grow z-0">{children}</div>
+            <div className="">
               {' '}
               <FriendList list={friends} />
             </div>

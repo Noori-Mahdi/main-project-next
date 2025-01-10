@@ -58,18 +58,18 @@ export const Clock = ({type}: ClockPropType) => {
       {type === 'full' ? (
         <div onMouseLeave={()=>setShowDetail(false)} onMouseEnter={()=>setShowDetail(true)} className="flex flex-col cursor-pointer justify-center items-center px-2 py-1 Orbitron z-10 select-none">
           <div className="time_wrapper  mb-2">
-            <span className="text-primary text-2xl mr-2 font-medium">
+            <span className="text-cyan-400 text-2xl mr-2 font-medium">
               {time.hour}
             </span>
-            <span className="text-primary text-2xl mr-2 font-medium">:</span>
-            <span className="text-primary text-2xl mr-2 font-medium">
+            <span className="text-cyan-400 text-2xl mr-2 font-medium">:</span>
+            <span className="text-cyan-400 text-2xl mr-2 font-medium">
               {time.min}
             </span>
-            <span className="text-primary text-xs font-xs ">{time.sec}</span>
+            <span className="text-cyan-400 text-xs font-xs ">{time.sec}</span>
             {weekDays.map((day, index) => (
               <span
                 key={index}
-                className={`text-primary  ${
+                className={`text-cyan-400  ${
                   time.weekDay === index ? 'inline ml-2 font-medium ' : 'hidden'
                 }`}
               >
@@ -79,21 +79,21 @@ export const Clock = ({type}: ClockPropType) => {
           </div>
           {showDetail && (
             <div className="date_wrapper mb-2 tracking-wider font-bold text-base">
-              <span className="text-primary ">
+              <span className="text-cyan-400 ">
                 {monthNames[time.month]} {time.day}, {time.year}
               </span>
             </div>
           )}
         </div>
       ) : (
-        <div className="text-white Orbitron font-bold">
+        <div className="text-cyan-400 Orbitron font-bold">
           <span className="text-base">{time.hour}</span>
           <span className="text-base">:</span>
           <span className="text-base">{time.min}</span>
           {weekDays.map((day, index) => (
             <span
               key={index}
-              className={`text-primary ml-2 text-xs  ${
+              className={`text-cyan-400 ml-2 text-xs  ${
                 time.weekDay === index ? '' : 'hidden'
               }`}
             >

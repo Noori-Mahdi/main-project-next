@@ -3,7 +3,7 @@ import {api} from '../api';
 const sendFriendRequest = (senderId: string, receiverId: string) => {
   return api.post('/requestFriend', {senderId, receiverId});
 };
-const putFriendRequest = (requestId: string, isAccepted: boolean) => {
+const putFriendRequest = (requestId: number, isAccepted: boolean) => {
   return api.put('/requestFriend', {requestId, isAccepted});
 };
 const getFriendRequest = (userId: string) => {
