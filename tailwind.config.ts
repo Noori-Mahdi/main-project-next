@@ -1,4 +1,4 @@
-import type {Config} from 'tailwindcss';
+import type { Config } from 'tailwindcss';
 
 export default {
   content: [
@@ -11,6 +11,15 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+      },
+      animation: {
+        'width-grow': 'widthGrow 5s ease-in-out forwards',
+      },
+      keyframes: {
+        widthGrow: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
       },
     },
   },

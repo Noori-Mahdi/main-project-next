@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export async function GET(req: Request) {
   try {
     const url = new URL(req.url);
-    const userId = url.searchParams.get('userId'); // دریافت userId از query string
+    const userId = url.searchParams.get('userId');
 
     if (!userId) {
       return new Response('User ID is required', { status: 400 });

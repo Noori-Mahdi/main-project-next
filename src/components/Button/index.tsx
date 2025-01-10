@@ -14,7 +14,7 @@ const Button = ({
   const getButtonStyle = () => {
     switch (styleType) {
       case 'primary':
-        return 'bg-primary text-white hover:bg-cyan-400';
+        return 'bg-yellow-900 text-white hover:bg-yellow-800';
       case 'secondary':
         return 'bg-gray-500 text-white hover:bg-gray-700';
       case 'danger':

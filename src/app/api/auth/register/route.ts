@@ -14,15 +14,19 @@ interface IRegisterBody {
 export async function POST(req: NextRequest) {
   try {
     const data: IRegisterBody = await req.json();
+
     if (!data.email || !data.password || !data.userName) {
       return new Response('please fill all the fields', {status: 400});
     }
+
     const user = await prisma.user.findFirst({
       where: {
         email: data.email,
       },
     });
+
     if (user) return new Response('user already exists', {status: 400});
+
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(data.password, salt);
     const newUser = await prisma.user.create({
@@ -33,6 +37,7 @@ export async function POST(req: NextRequest) {
         phone: data.phone || '',
       },
     });
+
     return new Response('user created successfully', {status: 201});
   } catch (error) {
     return new Response('Internal server error', {status: 500});

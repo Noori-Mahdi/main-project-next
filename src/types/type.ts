@@ -11,6 +11,12 @@ type InputType =
   | 'textarea'
   | 'select';
 
+export interface ToastPropsType {
+  message: string;
+  type: 'error' | 'warning' | 'success';
+  onClose?: () => void;
+}
+
 interface Option {
   value: string | number;
   label: string;
@@ -37,31 +43,15 @@ export type ListNewsCardPropsType = NewsCardPropsType[] | [];
 export interface InputPropsType {
   type: InputType;
   name: string;
-  label?: string;
+  label: string;
   placeholder?: string;
-  options?: Option[];
   disabled?: boolean;
-  defaultValuevalue?: string;
-  defaultValue?: string;
-  max?: number;
-  min?: number;
-  maxLength?: number;
-  minLength?: number;
-  rows?: number;
-  customError?: boolean;
   required?: boolean;
-  readonly?: boolean;
-  showPassword?: boolean;
-  tooltip?: string;
-  className?: string;
+  readOnly?: boolean;
+  classNameInput?: string;
   classNameLabel?: string;
-  passwordLvl?: (e: number) => void;
-  onError?: (e: string | null) => void;
-  onFocus?: (
-    e: React.FocusEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => void;
+  icon?: IconName;
+  onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (
     e: React.FocusEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -75,7 +65,6 @@ export interface InputPropsType {
 }
 
 export interface InputBoxType extends InputPropsType {
-  icon: IconProp; //custom type fortawesome
   disableForgetPassword?: boolean;
   propError?: string | null;
   disableCheackPasswordLvl?: boolean;
@@ -141,7 +130,7 @@ export interface ImgBoxPropsType {
   classImageBox?: string;
   classLabel?: string;
   classSubLabel?: string;
-  onClick?:()=>void
+  onClick?: () => void;
 }
 
 export interface InfoBoxUserPropsType

@@ -2,7 +2,7 @@
 
 import {useContext, useState} from 'react';
 import Button from '../Button';
-import Input from '../Inpurt';
+import Input from '../Input';
 import Modal from '../Modal';
 import {getSearchUsers} from '@/services/friends';
 import {UserInfo} from '@/types/type';
