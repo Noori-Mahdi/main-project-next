@@ -9,6 +9,8 @@ import {useRouter} from 'next/navigation';
 import Toast from '@/components/Toast';
 import {ToastPropsType} from '@/types/type';
 import Link from 'next/link';
+import '@/sass/global.scss';
+import LoadingComponent from '@/components/LoadingComponent';
 
 const Login = () => {
   const {updateUserInfo} = useContext(Context);
@@ -18,6 +20,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = (e: any) => {
     const {name, value} = e.target;
@@ -27,11 +30,14 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await login(form);
       await updateUserInfo();
-      router.replace('/page/home');
+      router.replace('/home');
     } catch (error: any) {
       setError({type: 'error', message: error.response?.data});
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +50,8 @@ const Login = () => {
           onClose={() => setError(null)}
         />
       )}
-      <div className="mb-5 mt-3">
+      <div className=" px-3 py-5  relative">
+        {loading && <LoadingComponent />}
         <form onSubmit={handleSubmit} className="w-full grow">
           <h3 className="text-3xl text-center mb-10 font-bold uppercase text-yellow-900">
             Sing in
@@ -55,7 +62,7 @@ const Login = () => {
               label="email"
               onChange={(e) => handleFormSubmit(e)}
               name="email"
-              type="text"
+              type="email"
               icon={'faEnvelope'}
               required
               classNameInput="bg-transparent outline-none p-2 text-sm font-medium tracking-wide "

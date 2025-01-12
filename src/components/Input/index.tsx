@@ -121,6 +121,8 @@ const Input = ({
           disabled={disabled}
           required={required}
           readOnly={readOnly}
+          autoComplete={'off'}
+          defaultValue={''}
         />
       </div>
       <div

@@ -1,11 +1,11 @@
-import { DynamicIconProps } from '@/types/type';
+import { DynamicIconPropsType } from '@/types/type';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as solidIcons from '@fortawesome/free-solid-svg-icons';
 
 
 
 
-const DynamicIcon: React.FC<DynamicIconProps> = ({
+const DynamicIcon: React.FC<DynamicIconPropsType> = ({
   iconName,
   className,
   onClick,

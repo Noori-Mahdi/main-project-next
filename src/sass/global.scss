@@ -1,110 +1,11 @@
 @use './Variable.scss' as variable;
-// primary class (Color)
-.text-primary{
-    color: variable.$primary-color;
-}
-.bg-primary{
-    background-color: variable.$primary-color;
-}
-.border-color-primary{
-    border-color: variable.$primary-color;
-}
 
-.border-x-color-primary{
-    border-right-color: variable.$primary-color !important;
-    border-left-color: variable.$primary-color !important;
-
-}
-// success class (Color)
-.text-success{
-    color: variable.$success-color;
-}
-.bg-success{
-    background-color: variable.$success-color;
-}
-.border-color-success{
-    border-color: variable.$success-color;
-}
-
-.border-x-color-success{
-    border-right-color: variable.$success-color !important;
-    border-left-color: variable.$success-color !important;
-
-}
-// warning class (Color)
-.text-warning{
-    color: variable.$warning-color;
-}
-.bg-warning{
-    background-color: variable.$warning-color;
-}
-.border-color-warning{
-    border-color: variable.$warning-color;
-}
-
-.border-x-color-warning{
-    border-right-color: variable.$warning-color !important;
-    border-left-color: variable.$warning-color !important;
-
-}
-// secandry class (Color)
-.text-secandry{
-    color: variable.$secandry-color;
-}
-.bg-secandry{
-    background-color: variable.$secandry-color;
-}
-.border-color-secandry{
-    border-color: variable.$secandry-color;
-}
-
-// white class (Color)
-.text-white{
-    color: variable.$white-color;
-}
-.bg-white{
-    background-color: variable.$white-color;
-}
-.border-color-white{
-    border-color: variable.$white-color;
-}
-
-// muted class (Color)
-.text-muted{
-    color: variable.$muted-color;
-}
-.bg-muted{
-    background-color: variable.$muted-color;
-}
-.border-color-muted{
-    border-color: variable.$muted-color;
-}
-
-// danger class (Color)
-.text-danger{
-    color: variable.$danger-color;
-}
-.bg-danger{
-    background-color: variable.$danger-color;
-}
-.border-color-danger{
-    border-color: variable.$danger-color;
-}
-
-.border-x-color-danger{
-    border-right-color: variable.$danger-color !important;
-    border-left-color: variable.$danger-color !important;
-
-}
 // animation TeamForge
 
 .textAnimation {
     position: relative;
-    font-size: 28px;
-    width: fit-content;
-    font-weight: 700;
-    color: variable.$secandry-color;
-    -webkit-text-stroke: 0.1vw variable.$secandry-color;
+    color: #171717;
+    -webkit-text-stroke: 0.1vw #171717;
     text-transform: uppercase;
     margin: 1rem;
   }
@@ -116,9 +17,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: variable.$primary-color;
-    -webkit-text-stroke: 0.1vw variable.$primary-color;
-    border-right: 2px solid variable.$primary-color;
+    color: #713f12;
+    -webkit-text-stroke: 0.1vw #713f12;
+    border-right: 2px solid #171717;
     overflow: hidden;
     animation: animateText 6s linear infinite;
   }
@@ -133,13 +34,4 @@
     90% {
       width: 100%;
     }
-  }
-
-// glassBox
-  .glassBox {
-background: rgba(255, 255, 255, 0.16);
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(5px);
--webkit-backdrop-filter: blur(5px);
-border: 1px solid rgba(255, 255, 255, 0.3);
   }

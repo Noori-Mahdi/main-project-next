@@ -4,7 +4,6 @@ import {useState, useEffect} from 'react';
 import {ClockPropType} from '@/types/type';
 
 export const Clock = ({type}: ClockPropType) => {
-  const [showDetail, setShowDetail] = useState(false);
   const [time, setTime] = useState({
     sec: '00',
     min: '00',
@@ -56,7 +55,7 @@ export const Clock = ({type}: ClockPropType) => {
   return (
     <>
       {type === 'full' ? (
-        <div onMouseLeave={()=>setShowDetail(false)} onMouseEnter={()=>setShowDetail(true)} className="flex flex-col cursor-pointer justify-center items-center px-2 py-1 Orbitron z-10 select-none">
+        <div className="flex flex-col cursor-pointer justify-center items-center px-2 py-1 Orbitron z-10 select-none">
           <div className="time_wrapper  mb-2">
             <span className="text-cyan-400 text-2xl mr-2 font-medium">
               {time.hour}
@@ -77,13 +76,12 @@ export const Clock = ({type}: ClockPropType) => {
               </span>
             ))}
           </div>
-          {showDetail && (
-            <div className="date_wrapper mb-2 tracking-wider font-bold text-base">
-              <span className="text-cyan-400 ">
-                {monthNames[time.month]} {time.day}, {time.year}
-              </span>
-            </div>
-          )}
+
+          <div className="date_wrapper mb-2 tracking-wider font-bold text-base">
+            <span className="text-cyan-400 ">
+              {monthNames[time.month]} {time.day}, {time.year}
+            </span>
+          </div>
         </div>
       ) : (
         <div className="text-cyan-400 Orbitron font-bold">
@@ -97,7 +95,7 @@ export const Clock = ({type}: ClockPropType) => {
                 time.weekDay === index ? '' : 'hidden'
               }`}
             >
-              {day}
+              {day}``
             </span>
           ))}
         </div>

@@ -42,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <>
+    <div className='px-3 py-5  relative'>
       {error && (
         <Toast
           message={error.message}
@@ -50,7 +50,7 @@ const Register = () => {
           onClose={() => setError(null)}
         />
       )}
-      <form onSubmit={handleSubmit} className="w-full">
+      <form onSubmit={handleSubmit} className="w-full ">
         <h3 className="text-3xl text-center mb-10 font-bold uppercase text-yellow-900">
           Register
         </h3>
@@ -127,7 +127,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

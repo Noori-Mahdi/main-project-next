@@ -5,9 +5,7 @@ export const api = axios.create({
     headers: { 'Content-Type': 'application/json' }
 });
 
-// اینترسپتور درخواست
 const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
-    // بررسی اینکه کد در مرورگر اجرا می‌شود
     if (typeof window !== 'undefined') {
         const token = localStorage.getItem('token');
         if (token) {
@@ -17,7 +15,6 @@ const apiInterceptor = async (request: InternalAxiosRequestConfig) => {
     return request;
 };
 
-// اینترسپتور پاسخ
 const errorInterceptor = async (axiosError: AxiosError) => {
     return Promise.reject(axiosError);
 };

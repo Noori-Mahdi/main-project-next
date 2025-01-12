@@ -9,7 +9,6 @@ import {
 import {getUserInfo} from '@/services/userInfo';
 import {logout} from '@/services/auth';
 import {useRouter} from 'next/navigation';
-import { getFriends } from '@/services/friends';
 
 export const Context = createContext<ContextReturnType>(
   {} as ContextReturnType
@@ -21,7 +20,6 @@ const MainContext = (props: MainContextProps) => {
   const [state, setState] = React.useState<MainContextState>({
     user: undefined,
   });
-  const [friendList,setFriendList] = useState()
 
   const updateUserInfo = async () => {
     try {
@@ -40,7 +38,7 @@ const MainContext = (props: MainContextProps) => {
 
   const handleLogout = () => {
     logout().then(() => {
-      router.push('/auth/login');
+      router.push('/login');
       setState((prevState) => ({...prevState, user: undefined}));
     });
   };
@@ -53,11 +51,9 @@ const MainContext = (props: MainContextProps) => {
     <Context.Provider
       value={{
         ...state,
-        // friendList,
         isLoggedIn,
         updateUserInfo,
         handleLogout,
-        // updateFriendList,
       }}
     >
       {children}

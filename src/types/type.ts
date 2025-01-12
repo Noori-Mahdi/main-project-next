@@ -1,9 +1,10 @@
-import {IconProp} from '@fortawesome/fontawesome-svg-core';
-import {ChangeEvent, ReactNode} from 'react';
+import { ReactNode} from 'react';
 import * as solidIcons from '@fortawesome/free-solid-svg-icons';
 import {MouseEventHandler} from 'react';
 
-type InputType =
+//----------------------------------------------- Type -----------------------------------------------
+
+type InputType = // input type
   | 'text'
   | 'email'
   | 'number'
@@ -11,34 +12,85 @@ type InputType =
   | 'textarea'
   | 'select';
 
+  export interface UserInfo { 
+    id: string;
+    image: any;
+    userName: string;
+    email?: string;
+  }
+  
+  export type IconName = keyof typeof solidIcons; //for Font AwesomeIcon
+
+  export interface Pages {
+    label: string;
+    icon: any;
+    URL: string;
+    public: boolean;
+    childLink?: Pages[];
+  }
+  
+//-------------------------------------- Components Props Type ------------------------------------
+
 export interface ToastPropsType {
   message: string;
   type: 'error' | 'warning' | 'success';
   onClose?: () => void;
 }
 
-interface Option {
-  value: string | number;
-  label: string;
-}
-
-export interface NewsCardPropsType {
-  title: string;
-  rate?: number;
-  content: string;
-  image: string;
-  onClick: () => void;
-}
 export interface ClockPropType {
   type: 'full' | 'time';
 }
 
-export interface InfoBoxPropsType {
-  title: string;
-  content: string;
+export interface ButtonPropsType {
+  label?: string;
+  onClick?: (e: any) => void;
+  type?: 'button' | 'submit' | 'reset';
+  styleType?: 'primary' | 'secondary' | 'danger';
+  disabled?: boolean;
+  className?: string;
+  icon?: IconName;
 }
 
-export type ListNewsCardPropsType = NewsCardPropsType[] | [];
+export interface ImgBoxPropsType {
+  alt: string;
+  image: any;
+  imageWidth: number;
+  imageHeight: number;
+  label?: string;
+  subLabel?: string;
+  classImage?: string;
+  classImageBox?: string;
+  classLabel?: string;
+  classSubLabel?: string;
+  onClick?: () => void;
+}
+
+export interface HeaderTypeProps{
+  userName?:string;
+  image?: any;
+  roleAdmin?:boolean;
+  pages: Pages[];
+}
+
+
+export interface ModalPropsType {
+  isOpen: boolean;
+  onClose?: () => void;
+  children: ReactNode;
+}
+
+export interface DynamicIconPropsType {
+  iconName: IconName;
+  className?: string;
+  onClick?: MouseEventHandler<SVGSVGElement>;
+}
+
+export interface ConfirmationModalPropsType {
+  isOpen: boolean;
+  onConfirm: () => void;
+  onCancel: () => void;
+  message: string;
+}
 
 export interface InputPropsType {
   type: InputType;
@@ -64,21 +116,7 @@ export interface InputPropsType {
   ) => void;
 }
 
-export interface InputBoxType extends InputPropsType {
-  disableForgetPassword?: boolean;
-  propError?: string | null;
-  disableCheackPasswordLvl?: boolean;
-}
-
-export interface ButtonPropsType {
-  label?: string;
-  onClick?: (e: any) => void;
-  type?: 'button' | 'submit' | 'reset';
-  styleType?: 'primary' | 'secondary' | 'danger';
-  disabled?: boolean;
-  className?: string;
-  icon?: IconName;
-}
+// ------------------------------------------ Context Type ------------------------------------------
 
 export interface ContextReturnType {
   // friendList:any;
@@ -86,7 +124,6 @@ export interface ContextReturnType {
   isLoggedIn: boolean;
   updateUserInfo: () => void;
   handleLogout: () => void;
-  // updateFriendList: () => void;
 }
 
 export interface MainContextProps {
@@ -96,78 +133,4 @@ export interface MainContextProps {
 export interface MainContextState {
   user: any | undefined;
 }
-export interface Pages {
-  label: string;
-  icon: any;
-  URL: string;
-  public: boolean;
-  childLink?: Pages[];
-}
 
-export interface UserInfo {
-  id: string;
-  image: any;
-  userName: string;
-  email?: string;
-}
-
-export interface UserBoxPropsType {
-  user: UserInfo;
-}
-
-export interface FriendListPropsType {
-  list: UserInfo[];
-}
-
-export interface ImgBoxPropsType {
-  alt: string;
-  image: any;
-  imageWidth: number;
-  imageHeight: number;
-  label?: string;
-  subLabel?: string;
-  classImage?: string;
-  classImageBox?: string;
-  classLabel?: string;
-  classSubLabel?: string;
-  onClick?: () => void;
-}
-
-export interface InfoBoxUserPropsType
-  extends Pick<ImgBoxPropsType, 'alt' | 'image' | 'label' | 'subLabel'> {}
-
-export interface ModalPropsType {
-  isOpen: boolean;
-  onClose?: () => void;
-  children: ReactNode;
-}
-
-export type IconName = keyof typeof solidIcons;
-
-export interface DynamicIconProps {
-  iconName: IconName;
-  className?: string;
-  onClick?: MouseEventHandler<SVGSVGElement>;
-}
-
-export interface ConfirmationModalPropsType {
-  isOpen: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-  message: string;
-}
-
-export interface RequestFriendNotifType {
-  id: number;
-  senderId: string | 'systeam';
-  receiverId: string;
-  status: 'pending' | 'accepted' | 'rejected';
-  sender: {
-    id: number;
-    image: any;
-    userName: string;
-    email?: string;
-    title?: string;
-    content?: string;
-  };
-}

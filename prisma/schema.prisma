@@ -18,41 +18,11 @@ model User {
   createdAt   DateTime        @default(now())
   updateAt    DateTime        @updatedAt
 
-  friends     User[]          @relation("UserFriends")
-  friendOf    User[]          @relation("UserFriends")
-  
-  sentRequests FriendRequest[] @relation("SenderRequests")
-  receivedRequests FriendRequest[] @relation("ReceiverRequests")
-}
-
-
-
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String
-  address   String
-  body      String
-  image     String
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
-}
-
-model News {
-  id        Int      @id @default(autoincrement())
-  title     String
-  content   String
-  public    Boolean  @default(false)
-  image     String
-  exptime   DateTime 
-
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
 }
 
 model Pages {
   id        Int       @id @default(autoincrement())
   label     String
-  icon      String    
   URL       String    @default("/home")
   public    Boolean   @default(true)
   childLink ChildLink[] // رابطه یک به چند
@@ -62,17 +32,8 @@ model ChildLink {
   id        Int       @id @default(autoincrement())
   label     String
   URL       String
-  icon      String
   pageId    Int
   page      Pages     @relation(fields: [pageId], references: [id]) // کلید خارجی
 }
 
-model FriendRequest {
-  id          Int      @id @default(autoincrement())
-  senderId    String   // کاربری که درخواست فرستاده
-  sender      User     @relation("SenderRequests", fields: [senderId], references: [id])
-  receiverId  String   // کاربری که درخواست دریافت کرده
-  receiver    User     @relation("ReceiverRequests", fields: [receiverId], references: [id])
-  status      String   @default("pending") // وضعیت درخواست: pending, accepted, rejected
-  createdAt   DateTime @default(now())
-}
+
