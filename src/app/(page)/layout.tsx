@@ -1,9 +1,8 @@
 import {getPages} from '@/services/pages';
 import {getUserInfo} from '@/helper/authentication';
-import {Pages} from '@prisma/client';
 import {cookies} from 'next/headers'; // برای دسترسی به کوکی‌ها
 import Header from '@/components/Header';
-import MainContext from '@/providers/MainContext';
+import BasketBox from '@/components/BasketBox';
 
 export default async function RootLayout({
   children,
@@ -40,19 +39,21 @@ export default async function RootLayout({
 
     // رندر کردن کامپوننت‌ها
     return (
-      <MainContext>
-        <div className="flex w-screen h-screen">
+      <div className="flex flex-col w-screen h-screen overflow-hidden">
+        <div>
+          {' '}
           <Header
             image={image}
             userName={userName}
             pages={pageListArray}
             roleAdmin={roleAdmin}
           />
-          <div className="flex h-full relative">
-            <div className="grow z-0">{children}</div>
-          </div>
         </div>
-      </MainContext>
+        <div className="flex h-full relative">
+          <div className="grow z-0">{children}</div>
+          <BasketBox />
+        </div>
+      </div>
     );
   } catch (error) {
     console.error('Error in RootLayout:', error);

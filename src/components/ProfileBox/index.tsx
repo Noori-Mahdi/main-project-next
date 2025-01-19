@@ -46,7 +46,7 @@ const ProfileBox = ({userName, image, firstLetter}: ProfileBoxPropsType) => {
   return (
     <div
       ref={profileBoxRef}
-      className="flex justify-center items-center w-9 h-9 cursor-pointer rounded-full relative border-2 border-yellow-900 p-0.5"
+      className="flex justify-center items-center select-none w-9 h-9 cursor-pointer rounded-full relative border-2 border-yellow-900 p-0.5 z-50"
     >
       <div
         onClick={() => {

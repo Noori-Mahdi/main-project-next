@@ -10,7 +10,7 @@ const Toast = ({ message, type, onClose }: ToastPropsType) => {
     const timer = setTimeout(() => {
       setVisible(false);
       if (onClose) onClose();
-    }, 5000); // زمان انیمیشن
+    }, 5000);
     return () => clearTimeout(timer);
   }, [onClose]);
 

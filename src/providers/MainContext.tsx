@@ -17,9 +17,10 @@ export const Context = createContext<ContextReturnType>(
 const MainContext = (props: MainContextProps) => {
   const router = useRouter();
   const {children} = props;
-  const [state, setState] = React.useState<MainContextState>({
+  const [state, setState] = useState<MainContextState>({
     user: undefined,
   });
+  const [showBasketBox,setShowBasketBox] = useState(false)
 
   const updateUserInfo = async () => {
     try {
@@ -54,6 +55,8 @@ const MainContext = (props: MainContextProps) => {
         isLoggedIn,
         updateUserInfo,
         handleLogout,
+        showBasketBox,
+        setShowBasketBox,
       }}
     >
       {children}

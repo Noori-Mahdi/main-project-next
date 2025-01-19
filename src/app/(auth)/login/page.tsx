@@ -11,6 +11,7 @@ import {ToastPropsType} from '@/types/type';
 import Link from 'next/link';
 import '@/sass/global.scss';
 import LoadingComponent from '@/components/LoadingComponent';
+import { useToast } from '@/providers/ToastProvider';
 
 const Login = () => {
   const {updateUserInfo} = useContext(Context);
@@ -21,6 +22,9 @@ const Login = () => {
     password: '',
   });
   const [loading, setLoading] = useState(false);
+
+  const { addToast } = useToast();
+
 
   const handleFormSubmit = (e: any) => {
     const {name, value} = e.target;
@@ -34,8 +38,9 @@ const Login = () => {
       await login(form);
       await updateUserInfo();
       router.replace('/home');
+      addToast('Login successful! Welcome back'  ,'success')
     } catch (error: any) {
-      setError({type: 'error', message: error.response?.data});
+      addToast(error.response?.data,'error')
     } finally {
       setLoading(false);
     }
@@ -43,13 +48,6 @@ const Login = () => {
 
   return (
     <>
-      {error && (
-        <Toast
-          message={error.message}
-          type={error.type}
-          onClose={() => setError(null)}
-        />
-      )}
       <div className=" px-3 py-5  relative">
         {loading && <LoadingComponent />}
         <form onSubmit={handleSubmit} className="w-full grow">

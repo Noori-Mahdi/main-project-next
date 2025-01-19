@@ -10,7 +10,7 @@ interface LogoPropsType {
 const Logo = ({type = 'row', label}: LogoPropsType) => {
   return (
     <div
-      className={`flex ${type == 'col' && 'flex-col'} justify-center items-start`}
+      className={`flex ${type == 'col' && 'flex-col'} select-none justify-center items-start`}
     >
       <ImgBox
         alt="logo"

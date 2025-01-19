@@ -1,39 +1,34 @@
-import { ReactNode} from 'react';
+import {ReactNode} from 'react';
 import * as solidIcons from '@fortawesome/free-solid-svg-icons';
 import {MouseEventHandler} from 'react';
 
 //----------------------------------------------- Type -----------------------------------------------
 
 type InputType = // input type
-  | 'text'
-  | 'email'
-  | 'number'
-  | 'password'
-  | 'textarea'
-  | 'select';
+  'text' | 'email' | 'number' | 'password' | 'textarea' | 'select';
 
-  export interface UserInfo { 
-    id: string;
-    image: any;
-    userName: string;
-    email?: string;
-  }
-  
-  export type IconName = keyof typeof solidIcons; //for Font AwesomeIcon
+export interface UserInfo {
+  id: string;
+  image: any;
+  userName: string;
+  email?: string;
+}
 
-  export interface Pages {
-    label: string;
-    icon: any;
-    URL: string;
-    public: boolean;
-    childLink?: Pages[];
-  }
-  
+export type IconName = keyof typeof solidIcons; //for Font AwesomeIcon
+
+export interface Pages {
+  label: string;
+  icon: any;
+  URL: string;
+  public: boolean;
+  childLink?: Pages[];
+}
+
 //-------------------------------------- Components Props Type ------------------------------------
 
 export interface ToastPropsType {
   message: string;
-  type: 'error' | 'warning' | 'success';
+  type: 'info' | 'error' | 'warning' | 'success';
   onClose?: () => void;
 }
 
@@ -45,7 +40,8 @@ export interface ButtonPropsType {
   label?: string;
   onClick?: (e: any) => void;
   type?: 'button' | 'submit' | 'reset';
-  styleType?: 'primary' | 'secondary' | 'danger';
+  color?: 'primary' | 'secondary' | 'danger';
+  size?: 'full' | 'lg' | 'base' | 'sm';
   disabled?: boolean;
   className?: string;
   icon?: IconName;
@@ -65,13 +61,12 @@ export interface ImgBoxPropsType {
   onClick?: () => void;
 }
 
-export interface HeaderTypeProps{
-  userName?:string;
+export interface HeaderTypeProps {
+  userName?: string;
   image?: any;
-  roleAdmin?:boolean;
+  roleAdmin?: boolean;
   pages: Pages[];
 }
-
 
 export interface ModalPropsType {
   isOpen: boolean;
@@ -124,6 +119,8 @@ export interface ContextReturnType {
   isLoggedIn: boolean;
   updateUserInfo: () => void;
   handleLogout: () => void;
+  setShowBasketBox: (e: boolean) => void;
+  showBasketBox: boolean;
 }
 
 export interface MainContextProps {
@@ -133,4 +130,3 @@ export interface MainContextProps {
 export interface MainContextState {
   user: any | undefined;
 }
-

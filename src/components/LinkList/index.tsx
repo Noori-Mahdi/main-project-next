@@ -13,7 +13,7 @@ const LinkList = ({list, active}: TextListPropsType) => {
   const pathname = usePathname();
 
   return (
-    <ul className="flex justify-between items-center gap-5 mt-2 capitalize text-yellow-900 text-lg font-bold">
+    <ul className="flex select-none justify-between items-center gap-5 mt-2 capitalize text-yellow-900 text-lg font-bold">
       {list &&
         list.map((page, index) =>
           page.public || active ? (

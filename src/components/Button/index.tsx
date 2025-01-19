@@ -6,17 +6,18 @@ const Button = ({
   label,
   onClick,
   type = 'button',
-  styleType = 'primary',
+  color = 'primary',
+  size = 'base',
   disabled = false,
   icon,
   className = '',
 }: ButtonPropsType) => {
-  const getButtonStyle = () => {
-    switch (styleType) {
+  const getButtonColor = () => {
+    switch (color) {
       case 'primary':
         return 'bg-yellow-900 text-white hover:bg-yellow-800';
       case 'secondary':
-        return 'bg-gray-500 text-white hover:bg-gray-700';
+        return 'bg-neutral-800 text-white hover:bg-neutral-700';
       case 'danger':
         return 'bg-danger text-white hover:bg-red-700';
       default:
@@ -25,18 +26,16 @@ const Button = ({
   };
 
   return (
-    <div className="w-full h-full">
-      <button
-        type={type}
-        onClick={(e) => {
-          onClick && onClick(e);
-        }}
-        disabled={disabled}
-        className={` px-4 text-lg font-semibold w-full py-2 rounded ${getButtonStyle()} ${className} ${disabled ? 'cursor-not-allowed':'cursor-pointer' } ${icon && 'flex justify-center items-center'} disabled:opacity-50`}
-      >
-        {icon ? <DynamicIcon className='text-sm' iconName={icon}/>: label}
-      </button>
-    </div>
+    <button
+      type={type}
+      onClick={(e) => {
+        onClick && onClick(e);
+      }}
+      disabled={disabled}
+      className={` ${getButtonColor()} ${className} ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} ${icon && 'flex justify-center items-center'} disabled:opacity-50 transition-colors duration-300 ease-in-out`}
+    >
+      {icon ? <DynamicIcon className="text-sm " iconName={icon} /> : label}
+    </button>
   );
 };
 
