@@ -5,9 +5,11 @@ import '@/sass/global.scss';
 interface LogoPropsType {
   type?: 'row' | 'col';
   label?: string;
+  width?: number;
+  height?: number;
 }
 
-const Logo = ({type = 'row', label}: LogoPropsType) => {
+const Logo = ({type = 'row', label, height, width}: LogoPropsType) => {
   return (
     <div
       className={`flex ${type == 'col' && 'flex-col'} select-none justify-center items-start`}
@@ -15,8 +17,8 @@ const Logo = ({type = 'row', label}: LogoPropsType) => {
       <ImgBox
         alt="logo"
         image="/logo/logo.png"
-        imageWidth={50}
-        imageHeight={50}
+        imageWidth={width ? width : 50}
+        imageHeight={height ? height : 50}
       />
       {label && (
         <div

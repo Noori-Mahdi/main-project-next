@@ -40,7 +40,7 @@ export default async function RootLayout({
     // رندر کردن کامپوننت‌ها
     return (
       <div className="flex flex-col w-screen h-screen overflow-hidden">
-        <div>
+        <div className="h-fit">
           {' '}
           <Header
             image={image}
@@ -49,8 +49,9 @@ export default async function RootLayout({
             roleAdmin={roleAdmin}
           />
         </div>
-        <div className="flex h-full relative">
-          <div className="grow z-0">{children}</div>
+
+        <div className="flex bg-yellow-700 h-full pb-3 overflow-y-auto overflow-x-hidden grow relative">
+          <div className="grow z-0 ">{children}</div>
           <BasketBox />
         </div>
       </div>

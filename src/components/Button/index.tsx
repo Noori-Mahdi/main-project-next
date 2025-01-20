@@ -9,6 +9,7 @@ const Button = ({
   color = 'primary',
   size = 'base',
   disabled = false,
+  iconClass,
   icon,
   className = '',
 }: ButtonPropsType) => {
@@ -20,6 +21,8 @@ const Button = ({
         return 'bg-neutral-800 text-white hover:bg-neutral-700';
       case 'danger':
         return 'bg-danger text-white hover:bg-red-700';
+      case 'transparent':
+        return 'bg-transparent';
       default:
         return 'bg-primary text-white hover:bg-cyan-400';
     }
@@ -34,7 +37,7 @@ const Button = ({
       disabled={disabled}
       className={` ${getButtonColor()} ${className} ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} ${icon && 'flex justify-center items-center'} disabled:opacity-50 transition-colors duration-300 ease-in-out`}
     >
-      {icon ? <DynamicIcon className="text-sm " iconName={icon} /> : label}
+      {icon ? <DynamicIcon className={`text-sm ${iconClass} `} iconName={icon} /> : label}
     </button>
   );
 };

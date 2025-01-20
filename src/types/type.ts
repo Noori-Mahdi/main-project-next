@@ -40,11 +40,12 @@ export interface ButtonPropsType {
   label?: string;
   onClick?: (e: any) => void;
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'secondary' | 'danger';
+  color?: 'primary' | 'secondary' | 'danger' | 'transparent';
   size?: 'full' | 'lg' | 'base' | 'sm';
   disabled?: boolean;
   className?: string;
   icon?: IconName;
+  iconClass?:string;
 }
 
 export interface ImgBoxPropsType {

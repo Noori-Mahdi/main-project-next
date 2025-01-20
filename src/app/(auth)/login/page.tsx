@@ -79,7 +79,7 @@ const Login = () => {
             />
           </div>
           <div className="w-full">
-            <Button type="submit" label="Sing in" />
+            <Button type="submit" label="Sing in" color='primary' className='w-full rounded-sm text-lg font-semibold capitalize p-1'/>
           </div>
         </form>
         <div className="mt-10">

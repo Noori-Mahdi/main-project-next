@@ -116,7 +116,7 @@ const Register = () => {
           />
         </div>
         <div className="w-full">
-          <Button className="uppercase" type="submit" label="Register" />
+          <Button className="w-full rounded-sm text-lg font-semibold uppercase p-1" type="submit" label="Register" color='primary'/>
         </div>
       </form>
       <div className="flex items-center mt-2 text-sm ">
