@@ -1,7 +1,10 @@
 import CommentBox from '@/components/CommentBox';
 import DynamicIcon from '@/components/DynamicIcon';
+import Footer from '@/components/Footer';
 import ItemCard from '@/components/ItemCard';
+import Logo from '@/components/Logo';
 import Title from '@/components/Title';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const Home = () => {
   return (
@@ -100,7 +103,7 @@ const Home = () => {
               <CommentBox />
             </div>
           </div>
-          <div className="bg-neutral-800 w-full h-56"></div>
+          <Footer />
         </div>
       </div>
     </div>
