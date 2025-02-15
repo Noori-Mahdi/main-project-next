@@ -1,17 +1,16 @@
 'use client';
 
-import { Pages } from '@/types/type';
+import {Pages} from '@/types/type';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
 interface TextListPropsType {
   list: Pages[];
-  active: boolean;
+  active: boolean | null;
 }
 
 const LinkList = ({list, active}: TextListPropsType) => {
   const pathname = usePathname();
-
   return (
     <ul className="flex select-none justify-between items-center gap-5 mt-2 capitalize text-yellow-900 text-lg font-bold">
       {list &&
@@ -19,11 +18,11 @@ const LinkList = ({list, active}: TextListPropsType) => {
           page.public || active ? (
             <li
               key={index}
-              className={`group relative cursor-pointer  ${pathname === page.URL ? 'text-yellow-700' : 'text-yellow-900'} hover:text-yellow-700`}
+              className={`group relative cursor-pointer  ${pathname.includes(page.URL) ? 'text-yellow-700' : 'text-yellow-900'} hover:text-yellow-700 ${active === null && pathname === '/profile' && 'cursor-not-allowed text-neutral-700'}`}
             >
               <Link href={page.URL}>{page.label}</Link>
               <span
-                className={`absolute bottom-0 left-0 h-[2px] bg-yellow-700 transition-all duration-300  ${pathname === page.URL ? 'w-full' : 'w-0 group-hover:w-full'} `}
+                className={`absolute bottom-0 left-0 h-[2px] bg-yellow-700 transition-all duration-300  ${pathname.includes(page.URL) ? 'w-full' : 'w-0 group-hover:w-full'} `}
               ></span>
             </li>
           ) : null

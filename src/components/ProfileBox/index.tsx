@@ -6,28 +6,23 @@ import ImgBox from '../ImgBox';
 import SwitchButton from '../SwitchButton';
 import {Context} from '@/providers/MainContext';
 import ConfirmationModal from '../ConfirmationModal';
+import Button from '../Button';
 
-interface ProfileBoxPropsType {
-  userName?: string;
-  image?: any;
-  firstLetter?: string | null;
-}
-
-const ProfileBox = ({userName, image, firstLetter}: ProfileBoxPropsType) => {
+const ProfileBox = () => {
   const [showList, setShowList] = useState(false);
   const [showConfirmMessage, setShowConfirm] = useState(false);
   const profileBoxRef = useRef<HTMLDivElement | null>(null);
-
-  const {handleLogout} = useContext(Context);
+  const {handleLogout, user} = useContext(Context);
+  const [firstLetter, setFirstLetter] = useState<null | string>(null);
 
   const handleLogOut = () => {
     handleLogout();
   };
 
-  // اضافه کردن لیسنر کلیک در سطح صفحه
+ 
   useEffect(() => {
+    if (user) setFirstLetter(user.userName.trim().charAt(0));
     const handleClickOutside = (event: MouseEvent) => {
-      // بررسی اگر کاربر خارج از ProfileBox کلیک کرده باشد
       if (
         profileBoxRef.current &&
         !profileBoxRef.current.contains(event.target as Node)
@@ -46,21 +41,23 @@ const ProfileBox = ({userName, image, firstLetter}: ProfileBoxPropsType) => {
   return (
     <div
       ref={profileBoxRef}
-      className="flex justify-center items-center select-none w-9 h-9 cursor-pointer rounded-full relative border-2 border-yellow-900 p-0.5 z-50"
+      className={`flex justify-center items-center select-none w-10 h-10 cursor-pointer rounded-full p-0.5 relative border-2 border-yellow-900  z-50 ${!firstLetter && 'border-none '}`}
     >
       <div
         onClick={() => {
-          setShowList(!showList);
+          if (firstLetter) setShowList(!showList);
         }}
         className="w-full h-full"
       >
         {firstLetter ? (
-          image ? (
+          user.image ? (
             <ImgBox
               alt="user image"
-              imageWidth={36}
-              imageHeight={36}
-              image={image}
+              imageWidth={30}
+              imageHeight={30}
+              image={user.image}
+              classImageBox="flex justify-center items-center h-full w-full  rounded-full "
+              classImage="rounded-full w-full h-full"
             />
           ) : (
             <div className="flex justify-center items-center text-white select-nonetext-xl font-semibold uppercase bg-neutral-800 rounded-full w-full h-full">
@@ -68,9 +65,13 @@ const ProfileBox = ({userName, image, firstLetter}: ProfileBoxPropsType) => {
             </div>
           )
         ) : (
-          <div className="flex justify-center items-center text-white select-none  bg-neutral-800 rounded-full w-full h-full">
-            <DynamicIcon iconName="faUser" />
-          </div>
+          <Button
+            label="login"
+            color="primary"
+            size="sm"
+            url="/login"
+            className="px-1 py-0.5 mt-1 rounded-sm capitalize tracking-wide text-sm font-medium"
+          />
         )}
       </div>
       {showList && (

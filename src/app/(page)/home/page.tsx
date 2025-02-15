@@ -1,12 +1,16 @@
 import CommentBox from '@/components/CommentBox';
 import DynamicIcon from '@/components/DynamicIcon';
 import Footer from '@/components/Footer';
+import GridCategory from '@/components/GridCategory';
 import ItemCard from '@/components/ItemCard';
 import Logo from '@/components/Logo';
 import Title from '@/components/Title';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {PrismaClient} from '@prisma/client';
 
-const Home = () => {
+const prisma = new PrismaClient();
+
+const Home = async () => {
+  const categories = await prisma.category.findMany();
   return (
     <div className=" w-full h-full">
       <div
@@ -74,17 +78,10 @@ const Home = () => {
           </div>
         </div>
         <div className="w-full h-96">
-          <div></div>
           <div className="mx-6 my-3">
             <Title title="Category" />
           </div>
-          <div className="grid gap-1 grid-cols-5 grid-rows-2 px-6 h-full w-full">
-            <div className="hover:brightness-125 hover:border-2 cursor-pointer hover:border-yellow-950 rounded  row-span-2 col-span-2 bg-neutral-800"></div>
-            <div className="hover:brightness-125 hover:border-2 cursor-pointer hover:border-yellow-950 rounded bg-neutral-800 col-span-1"></div>
-            <div className="hover:brightness-125 hover:border-2 cursor-pointer hover:border-yellow-950 rounded bg-neutral-800 col-span-2"></div>
-            <div className="hover:brightness-125 hover:border-2 cursor-pointer hover:border-yellow-950 rounded bg-neutral-800 col-span-2"></div>
-            <div className="hover:brightness-125 hover:border-2 cursor-pointer hover:border-yellow-950 rounded  bg-neutral-800 col-span-1"></div>
-          </div>
+          <GridCategory props={categories} />
           <div className="mx-6 my-3">
             <Title title="Popular Products" />
           </div>

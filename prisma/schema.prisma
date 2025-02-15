@@ -36,4 +36,40 @@ model ChildLink {
   page      Pages     @relation(fields: [pageId], references: [id]) // کلید خارجی
 }
 
+model Product {
+  id          String   @id @default(cuid()) 
+  name        String 
+  description String?  // توضیحات کالا
+  image       String?  
+  price       Int
+  discount    Int?   @default(0) // مقدار تخفیف (درصدی)
+  likes       Int      @default(0)  
+  rating      Int    @default(0) 
+  views       Int      @default(0)  // تعداد بازدیدها
+  sold        Int      @default(0)  // تعداد فروش
+  stock       Int      @default(0)  
+  status      String    @default("0")
+  categoryId  String  
+  category    Category @relation(fields: [categoryId], references: [id])
+  reviews     Review[] 
+  createdAt   DateTime @default(now())  
+  updatedAt   DateTime @updatedAt  
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  image     String?   @default("uploads/Category/Coffee Accessories.jpg")
+  products  Product[]
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  content   String  
+  rating    Float    @default(0.0)
+  userId    String  
+  productId String  
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+}
 

@@ -6,12 +6,12 @@ import {Context} from '@/providers/MainContext';
 import {login} from '@/services/auth';
 import {useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/navigation';
-import Toast from '@/components/Toast';
 import {ToastPropsType} from '@/types/type';
 import Link from 'next/link';
 import '@/sass/global.scss';
 import LoadingComponent from '@/components/LoadingComponent';
 import { useToast } from '@/providers/ToastProvider';
+import { cookies } from 'next/headers';
 
 const Login = () => {
   const {updateUserInfo} = useContext(Context);
@@ -48,7 +48,7 @@ const Login = () => {
 
   return (
     <>
-      <div className=" px-3 py-5  relative">
+      <div className=" px-3 py-5 relative">
         {loading && <LoadingComponent />}
         <form onSubmit={handleSubmit} className="w-full grow">
           <h3 className="text-3xl text-center mb-10 font-bold uppercase text-yellow-900">

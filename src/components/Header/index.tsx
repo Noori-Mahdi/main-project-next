@@ -37,7 +37,7 @@ const Header = async ({
           <BasketBoxButton />
           <ProfileBox
             firstLetter={firstLetter ? firstLetter : null}
-            userName={userName}
+            userName={userName ?? 'Guest'}
             image={image}
           />
         </div>

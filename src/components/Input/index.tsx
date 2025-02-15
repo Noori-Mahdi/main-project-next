@@ -6,18 +6,20 @@ import DynamicIcon from '../DynamicIcon';
 
 const Input = ({
   type,
+  Value,
   placeholder,
   disabled,
   label,
   required,
   readOnly,
   name,
+  defaultValue,
   onChange,
   onFocus,
   onBlur,
   icon,
 }: InputPropsType) => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(Value ? Value : '');
   const [focus, setFocus] = useState(false);
   const [inputType, setInputType] = useState<HTMLInputTypeAttribute>(type);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +27,11 @@ const Input = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     onChange && onChange(e);
     setValue(e.target.value);
   };
@@ -35,7 +41,11 @@ const Input = ({
     setFocus(true);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleBlur = (
+    e:
+      | React.FocusEvent<HTMLInputElement>
+      | React.FocusEvent<HTMLTextAreaElement, Element>
+  ) => {
     onBlur && onBlur(e);
     setFocus(false);
   };
@@ -63,18 +73,32 @@ const Input = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (defaultValue) {
+      setValue(defaultValue);
+    } else {
+      setValue('');
+    }
+  }, []);
+
+  useEffect(() => {
+    setValue(Value ?? '');
+  }, [Value]);
+
   return (
     <>
       <div
         ref={containerRef}
-        className={`relative h-12 w-full rounded-md text-gray-300 bg-neutral-800 focus:rounded-md shadow-inner border ${error ? 'border-red-700' : 'border-gray-600'}  hover:shadow focus-within:shadow-lg focus-within:border-yellow-900 transition-all duration-300"`}
+        className={`relative ${type == 'textarea' ? 'w-full' : 'h-12 w-full'} rounded-md text-gray-300 bg-neutral-800 focus:rounded-md shadow-inner border ${error ? 'border-red-700' : 'border-gray-600'}  hover:shadow focus-within:shadow-lg focus-within:border-yellow-900 transition-all duration-300"`}
       >
         <label
           onClick={handleLabelClick}
           className={`absolute left-0 ${
             focus || value !== ''
               ? 'top-0  -translate-y-full text-xs py-1'
-              : 'top-1/2 ml-3 text-sm bg-transparent -translate-y-1/2'
+              : type == 'textarea'
+                ? 'top-0 ml-3 mt-3'
+                : 'top-1/2 ml-3 text-sm bg-transparent -translate-y-1/2'
           }  transition-all duration-300 ease-in-out font-medium capitalize tracking-widest cursor-pointer`}
           htmlFor={name}
         >
@@ -110,29 +134,49 @@ const Input = ({
             )}
           </div>
         )}
-        <input
-          ref={inputRef}
-          className="w-full h-full outline-none border-0 rounded-md text-sm tracking-wider bg-neutral-700 px-2"
-          onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          name={name}
-          type={inputType}
-          disabled={disabled}
-          required={required}
-          readOnly={readOnly}
-          autoComplete={'off'}
-          defaultValue={''}
-        />
+        {type != 'textarea' ? (
+          <>
+            <input
+              ref={inputRef}
+              className="w-full h-full outline-none border-0 rounded-md text-sm tracking-wider bg-neutral-700 px-2"
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              name={name}
+              type={inputType}
+              disabled={disabled}
+              required={required}
+              readOnly={readOnly}
+              autoComplete={'off'}
+              value={value}
+            />
+          </>
+        ) : (
+          <>
+            <textarea
+              className="w-full h-full p-1 outline-none border-0 rounded-md text-sm tracking-wider bg-neutral-700 px-2"
+              onChange={handleChange}
+              // onFocus={handleFocus}
+              onBlur={handleBlur}
+              name={name}
+              disabled={disabled}
+              required={required}
+              readOnly={readOnly}
+              autoComplete={'off'}
+              value={value}
+              rows={12}
+            />
+          </>
+        )}
       </div>
-      <div
+      {/* <div
         className={`flex h-6 items-center text-red-700 text-sm ml-3 ${
           error == null ? 'invisible' : 'visible'
         }`}
       >
         <div className="w-1 h-1 rounded-full mr-1 bg-red-700"></div>
         <div>{error}</div>
-      </div>
+      </div> */}
     </>
   );
 };

@@ -12,6 +12,8 @@ export interface UserInfo {
   image: any;
   userName: string;
   email?: string;
+  phone?: string;
+  roleAdmie?: boolean;
 }
 
 export type IconName = keyof typeof solidIcons; //for Font AwesomeIcon
@@ -40,12 +42,36 @@ export interface ButtonPropsType {
   label?: string;
   onClick?: (e: any) => void;
   type?: 'button' | 'submit' | 'reset';
-  color?: 'primary' | 'secondary' | 'danger' | 'transparent';
+  color?: 'primary' | 'secondary' | 'danger' | 'info' | 'transparent';
   size?: 'full' | 'lg' | 'base' | 'sm';
   disabled?: boolean;
   className?: string;
   icon?: IconName;
-  iconClass?:string;
+  iconClass?: string;
+  url?: string;
+}
+
+export interface LinkObj {
+  label: string;
+  icon?: IconName;
+  pathname: string;
+}
+
+export interface OptinTypeInSelectBox {
+  id: string;
+  name: string;
+}
+
+export interface target{
+  target:{name:string,value:string}
+}
+
+export interface SelectBoxPropsType {
+  options: OptinTypeInSelectBox[];
+  label: string;
+  name: string;
+  icon?: IconName;
+  onChange?: (e:target) => void;
 }
 
 export interface ImgBoxPropsType {
@@ -63,9 +89,9 @@ export interface ImgBoxPropsType {
 }
 
 export interface HeaderTypeProps {
-  userName?: string;
-  image?: any;
-  roleAdmin?: boolean;
+  userName?: string | null;
+  image?: any | null;
+  roleAdmin?: boolean | null;
   pages: Pages[];
 }
 
@@ -73,6 +99,7 @@ export interface ModalPropsType {
   isOpen: boolean;
   onClose?: () => void;
   children: ReactNode;
+  className?: string;
 }
 
 export interface DynamicIconPropsType {
@@ -93,11 +120,13 @@ export interface InputPropsType {
   name: string;
   label: string;
   placeholder?: string;
+  Value?: string;
   disabled?: boolean;
   required?: boolean;
   readOnly?: boolean;
   classNameInput?: string;
   classNameLabel?: string;
+  defaultValue?: string;
   icon?: IconName;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur?: (
@@ -112,6 +141,38 @@ export interface InputPropsType {
   ) => void;
 }
 
+export interface ProductType {
+  id: string;
+  name: string;
+  description: string;
+  image: any | null;
+  price: number;
+  discount: number;
+  likes: number;
+  rating: number;
+  views: number;
+  sold: number;
+  stock: number;
+  status: 'AVAILABLE' | 'Out of Stock';
+  categoryId: string;
+  category:
+    | 'Coffee Accessories'
+    | 'Instant Coffee'
+    | 'Ground Coffee'
+    | 'Coffee Beans'
+    | 'Ready-to-Drink Coffee';
+  reviews: string[];
+}
+
+export interface TablePropsType {
+  list: UserInfo[] | ProductType[];
+  onDelete: (id: string) => void;
+  onShow: (id: string) => void;
+}
+
+export interface UserListPropsType {
+  list: UserInfo[];
+}
 // ------------------------------------------ Context Type ------------------------------------------
 
 export interface ContextReturnType {

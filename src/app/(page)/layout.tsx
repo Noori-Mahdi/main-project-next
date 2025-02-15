@@ -10,28 +10,26 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   try {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('token')?.value;
+    const cookie = await cookies();
+    const token = cookie.get('token')?.value;
 
-    if (!token) {
-      return (
-        <div className="flex items-center justify-center h-screen">
-          <p>No token provided. Please log in.</p>
-        </div>
-      );
-    }
 
-    const userInfo = await getUserInfo({cookies: cookieStore});
+    const userInfo = await getUserInfo({cookies: cookie});
+    let roleAdmin
+    let userName
+    let image
 
     if (!userInfo || 'status' in userInfo) {
-      return (
-        <div className="flex items-center justify-center h-screen">
-          <p>Failed to retrieve user information. Please try again later.</p>
-        </div>
-      );
+      roleAdmin= null
+      userName = null
+      image = null
+    }else{
+      roleAdmin = userInfo.roleAdmin;
+      userName = userInfo.userName;
+      image = userInfo.image;
+
     }
 
-    const {roleAdmin, friends, id, userName, image} = userInfo;
 
     // دریافت صفحات از سرور
     const res = await getPages();
@@ -50,10 +48,11 @@ export default async function RootLayout({
           />
         </div>
 
-        <div className="flex bg-yellow-700 h-full pb-3 overflow-y-auto overflow-x-hidden grow relative">
+        <div className="flex bg-yellow-700 h-full overflow-y-auto overflow-x-hidden grow relative">
           <div className="grow z-0 ">{children}</div>
           <BasketBox />
         </div>
+        
       </div>
     );
   } catch (error) {

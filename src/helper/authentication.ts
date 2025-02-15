@@ -56,26 +56,23 @@ export const getUserInfo = async (req: any) => {
   const auth_status = await isAuthenticated(req);
   if (auth_status.status) {
     // تبدیل userId به string
-    const userId = auth_status.userId?.toString(); 
+    const userId = auth_status.userId?.toString();
 
     const user = await prisma.user.findFirst({
       where: {
-        id: userId,  // اکنون شناسه به صورت string است
+        id: userId,
       },
       select: {
         id: true,
         email: true,
         userName: true,
         phone: true,
-        roleAdmin:true,
-        friends:true,
-        receivedRequests:true,
-        image:true,
+        roleAdmin: true,
+        image: true,
       },
     });
     return user;
   } else {
-    return { status: false, message: auth_status?.message };
+    return {status: false, message: auth_status?.message};
   }
 };
-
