@@ -70,6 +70,7 @@ export interface SelectBoxPropsType {
   options: OptinTypeInSelectBox[];
   label: string;
   name: string;
+  defaultValueId?: string;
   icon?: IconName;
   onChange?: (e:target) => void;
 }

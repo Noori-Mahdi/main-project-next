@@ -6,8 +6,18 @@ const getAllProduct = () => {
 
 const addProduct = (data: FormData) => {
   return api.post('/Product', data, {
-    headers: { 'Content-Type': 'multipart/form-data' },
+    headers: {'Content-Type': 'multipart/form-data'},
   });
 };
 
-export {getAllProduct, addProduct};
+const deleteProduct = (id: string) => {
+  return api.delete(`/Product/${id}`);
+};
+
+const editProduct = (id: string, data: FormData) => {
+  return api.put(`/Product/${id}`, data, {
+    headers: {'Content-Type': 'multipart/form-data'},
+  });
+};
+
+export {getAllProduct, addProduct, deleteProduct, editProduct};

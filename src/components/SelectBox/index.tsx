@@ -8,6 +8,7 @@ const SelectBox = ({
   label,
   name,
   icon,
+  defaultValueId,
   onChange,
 }: SelectBoxPropsType) => {
   const [value, setValue] = useState<OptinTypeInSelectBox>(options[0]);
@@ -33,6 +34,15 @@ const SelectBox = ({
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (defaultValueId && options)
+      setValue(
+        options.find((e) => {
+          e.id == defaultValueId;
+        }) || options[0]
+      );
+  }, [defaultValueId]);
 
   return (
     <div className="relative w-full" ref={selectBoxRef}>

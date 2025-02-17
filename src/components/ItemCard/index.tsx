@@ -40,11 +40,16 @@ const ItemCard = ({
           />
         </div>
         {discount && (
-          <div className="absolute flex justify-center left-0 top-0 -translate-x-1/4 translate-y-1/2 -rotate-45 w-6/12 bg-yellow-800 font-semibold text-gray-300">
+          <div className="absolute z-20 flex justify-center left-0 top-0 -translate-x-1/4 translate-y-1/2 -rotate-45 w-6/12 bg-yellow-800 font-semibold text-gray-300">
             {discount}%
           </div>
         )}
-        <Image alt="product1" src={image} width={30} height={30} />
+        <Image
+          alt={name}
+          src={image}
+          layout="fill"
+          className="absolute"
+        />
       </div>
       <div className="h-1/3 p-2 w-full flex flex-col justify-between">
         <div className=" capitalize text-sm font-semibold tracking-wide">

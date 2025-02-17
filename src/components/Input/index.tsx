@@ -74,16 +74,8 @@ const Input = ({
   }, []);
 
   useEffect(() => {
-    if (defaultValue) {
-      setValue(defaultValue);
-    } else {
-      setValue('');
-    }
-  }, []);
-
-  useEffect(() => {
-    setValue(Value ?? '');
-  }, [Value]);
+    setValue(Value ? Value : defaultValue ? defaultValue : '');
+  }, [Value, defaultValue]);
 
   return (
     <>
